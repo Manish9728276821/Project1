@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main # Trigger pipeline on push to main branch
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up the environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Use Node.js version 16 (replace if using other languages)
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install # Replace with "mvn install" or equivalent for other projects
+
+      # Step 4: Run tests
+      - name: Run Tests
+        run: npm test # Replace with your testing command
+
+      # Step 5: Deploy (optional)
+      - name: Deploy
+        run: echo "Deploying to server..." # Replace with actual deployment steps
